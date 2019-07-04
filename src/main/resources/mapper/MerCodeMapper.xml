@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjkj.ks_user.mapper.MerCodeMapper">
+
+	<select id="getLock" resultType="MerCode">
+        SELECT merId,merName,oneMerId,totalCode,generatedCode,used,notused,assign FROM t_mp_merCode WHERE merId=#{agentId} FOR UPDATE;
+    </select>
+	
+	<select id="get" resultType="MerCode">
+	    select * from t_mp_merCode where merId = #{merId}
+	</select>
+	
+	<update id="alter">
+        UPDATE t_mp_merCode SET generatedCode=generatedCode+#{generatedCode},notused=notused+#{notused},assign=assign+#{assign} WHERE merId=#{agentId};
+    </update>
+    
+    <update id="revises">
+        UPDATE t_mp_merCode SET used=used+#{used},notused=notused+#{notused} WHERE merId=#{agentId};
+    </update>
+</mapper>

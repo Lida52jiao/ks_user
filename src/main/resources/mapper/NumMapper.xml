@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjkj.ks_user.mapper.NumMapper">
+	
+	<select id="get" resultType="Number">
+	<!-- select * from t_mp_income left join t_mp_num on t_mp_income.merType = t_mp_num.merType where vipType = #{vipType} -->
+	SELECT * FROM t_mp_num LEFT JOIN t_mp_agentmerlevel ON t_mp_num.levelWeight = t_mp_agentmerlevel.levelWeight where showOrNot = "Y" and vipType = #{vipType}
+	</select>
+	
+</mapper>

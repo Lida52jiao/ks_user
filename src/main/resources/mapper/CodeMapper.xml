@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjkj.ks_user.mapper.CodeMapper">
+	
+	<select id="get" resultType="Code">
+	select codeId,activationCode,status,creatDate,actDate,merChantId,merName,merMp,agentId,remarks from t_mp_code where agentId=#{agentId} and status=#{status} order by codeId desc limit #{sindex},#{eindex} 
+	</select>
+	
+	<select id="selectCode" resultType="int">
+	select count(*) from t_mp_code where agentId=#{agentId} and status=#{status}
+	</select>
+	
+</mapper>
