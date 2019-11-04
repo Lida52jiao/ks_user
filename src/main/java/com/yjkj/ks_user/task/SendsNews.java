@@ -18,18 +18,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@Controller
 @Component
-@EnableScheduling
 @Lazy(false)
 public class SendsNews {
-	
+
 	@Autowired
 	private CardInformationService cardInformationService;
 	@Autowired
 	private MerChantsService merChantsService;
-	
-	@Scheduled(cron="0 0 10 * * ?")
+
+	@Scheduled(cron="0 0 11 * * ?")
 //	@Scheduled(cron="0 35 10,14 3 * ?")
 	public void task(){
 //		System.out.println("hhh");

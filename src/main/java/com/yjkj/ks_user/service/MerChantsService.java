@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface MerChantsService extends BaseService<MerChants> {
-	
+
 	int statistics(MerChants v);
 
 	int receive(String merChantId);
@@ -29,11 +29,12 @@ public interface MerChantsService extends BaseService<MerChants> {
 	void send(MerChants h);
 
 	void tran(String merName, String institutionId, String appId, String phone, String type);
-	
+
 	List<MerChants> getGainList(MerChants mer);
 
 	void sends(MerChants h);
 
 	void bind(MerChants k);
 
+    Integer countByMobile(String mobile);
 }

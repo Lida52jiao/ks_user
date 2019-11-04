@@ -136,13 +136,13 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-dysmsapi</artifactId>
-            <version>1.0.0</version>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.3.7</version>
         </dependency>
         <dependency>
-            <groupId>com.aliyuncs</groupId>
-            <artifactId>aliyun-cs</artifactId>
-            <version>3.3.1</version>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
     <dependencyManagement>

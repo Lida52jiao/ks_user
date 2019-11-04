@@ -20,35 +20,35 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
-		MerChantsService {
+public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements MerChantsService {
 
 	@Autowired
 	private MerChantsMapper merChantsMapper;
 	@Autowired
-	private RecordMapper recordMapper; 
+	private RecordMapper recordMapper;
 	@Autowired
 	private UsedMapper usedMapper;
 	@Autowired
 	private MerCodeMapper merCodeMapper;
 	@Autowired
 	private CodeMapper codeMapper;
-	
+
+	@Override
 	public int statistics(MerChants v) {
 		int n=merChantsMapper.gain(v);
 		return n;
 	}
-
+	@Override
 	public int receive(String merChantId) {
 		int n=merChantsMapper.selectCode(merChantId);
 		return n;
 	}
-
+	@Override
 	public int find(String merChantId) {
 		int n=merChantsMapper.get(merChantId);
 		return n;
 	}
-
+	@Override
 	public DuanXin getduanXin(String institutionId, String appId) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("institutionId", institutionId);
@@ -58,7 +58,7 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 		DuanXin duanXin=new DuanXin(job.get("accessKeyId").toString(), job.get("accessKeySecret").toString(), job.get("product").toString(), job.get("domain").toString(), job.get("autograph").toString(), job.get("templateCode").toString());
 		return duanXin;
 	}
-
+	@Override
 	public RenZhen getrenZhen(String institutionId, String appId) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("institutionId", institutionId);
@@ -68,12 +68,12 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 		RenZhen renZhen=new RenZhen(job.get("gatewayUrl").toString(), job.get("appIds").toString(), job.get("privateKey").toString(), job.get("zhimaPublicKey").toString(), job.getString("back").toString());
 		return renZhen;
 	}
-
+	@Override
 	public MerChant gain(MerChant t) {
 		MerChant s = merChantsMapper.receive(t);
 		return s;
 	}
-
+	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public YJResult get(String merChantId, String agentId, BigDecimal amount, String orderNo) {
 		Record record = new Record();
@@ -126,7 +126,7 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 		codeMapper.insert(code);
 		return YJResult.build(Constaint.NOT_CODE, "金额不匹配");
 	}
-
+	@Override
 	public void send(MerChants h) {
 		HashMap<String,Object> param = new HashMap<String,Object>();
 		param.put("merchantId", h.getMerChantId());
@@ -138,7 +138,7 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 		param.put("sign",aisleSign);
 		String resultJsonStr = HttpClientUtils.doPosts(Constaint.S, param);
 	}
-
+	@Override
 	public void tran(String merName, String institutionId, String appId,
                      String phone, String type) {
 		Map<String, String> param = new HashMap<String, String>();
@@ -149,11 +149,12 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 		param.put("type", type);
 		String resultJsonStr = HttpClientUtils.doPost(Constaint.HY, param);
 	}
-	
+	@Override
 	public List<MerChants> getGainList(MerChants mer) {
 		return merChantsMapper.gainList(mer);
 	}
-  public void bind(MerChants k) {
+	@Override
+	public void bind(MerChants k) {
 	  Map<String, String> param = new HashMap<>();
 	  param.put("merchantId", k.getOneMerId());
 	  param.put("msg", k.getMerMp());
@@ -167,6 +168,12 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements
 	  System.out.println(job);
   }
 
+	@Override
+	public Integer countByMobile(String mobile) {
+		return merChantsMapper.countByMobile(mobile);
+	}
+
+	@Override
   public void sends(MerChants h) {
 	  Map<String, String> param = new HashMap<>();
 	  param.put("merchantId", h.getOneMerId());
