@@ -1,5 +1,6 @@
 package com.yjkj.ks_user.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.oss.ClientException;
 import com.aliyuncs.DefaultAcsClient;
@@ -1388,6 +1389,39 @@ public class MerChantsController extends BaseController {
         }
         Integer count = merChantsService.countByMobile(mobile);
         return YJResult.ok(count);
+    }
+
+
+    /**
+     * //TODO 获取验证码
+     * @author  wdz
+     * @date   2019/11/19 18:39
+     * @param  mobile 手机号
+     **/
+    @RequestMapping(value = "sendCheckCode")
+    @ResponseBody
+    public  YJResult sendCheckCode(String mobile) {
+        if (!StringUtils.isEmpty(mobile) && mobile.trim().length() == 11){
+            Integer count = merChantsService.countByMobile(mobile);
+            if(count > 0){
+                List<MerChants> list = merChantsService.selectByMobile(mobile);
+                MerChants h = list.get(0);
+                String n = (int) (Math.random() * (999999 - 100000 + 1)) + 100000 + "";
+                h.setIdentifying(n);
+                merChantsService.update(h);
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("phone", h.getMerMp());
+                param.put("planId", n);
+                param.put("appId", h.getAppId());
+                param.put("institutionId", h.getInstitutionId());
+                param.put("type", "7");
+                String resultJsonStr = HttpClientUtils.doPost("http://47.104.25.59/templet/Tongzhi/send", param);
+                System.out.println(resultJsonStr);
+                return YJResult.ok();
+            }
+            return YJResult.build("0001","账户不存在");
+        }
+        return  YJResult.build("0001","手机号不正确");
     }
 
 }

@@ -26,4 +26,6 @@ public interface MerChantsMapper extends MyMapper<MerChants> {
 	  * @return
 	  */
     Integer countByMobile(String mobile);
+
+
 }

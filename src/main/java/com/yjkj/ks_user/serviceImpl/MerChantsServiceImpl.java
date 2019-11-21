@@ -174,6 +174,13 @@ public class MerChantsServiceImpl extends BaseServiceImpl<MerChants> implements 
 	}
 
 	@Override
+	public List<MerChants> selectByMobile(String mobile) {
+		MerChants m = new MerChants();
+		m.setMerMp(mobile);
+		return merChantsMapper.gainList(m);
+	}
+
+	@Override
   public void sends(MerChants h) {
 	  Map<String, String> param = new HashMap<>();
 	  param.put("merchantId", h.getOneMerId());

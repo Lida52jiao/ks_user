@@ -37,4 +37,6 @@ public interface MerChantsService extends BaseService<MerChants> {
 	void bind(MerChants k);
 
     Integer countByMobile(String mobile);
+
+    List<MerChants> selectByMobile(String mobile);
 }
