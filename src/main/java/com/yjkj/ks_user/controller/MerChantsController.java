@@ -133,6 +133,7 @@ public class MerChantsController extends BaseController {
                 h.setAgentStatus("N");
                 h.setFrozen("N");
                 h.setAppId(appId);
+                h.setIsNotUse("2");//1可用，2不可用
                 h.setAppName(URLDecoder.decode(appName));
                 h.setRegDate(System.currentTimeMillis() + "");
                 h.setStartDate(System.currentTimeMillis() + "");

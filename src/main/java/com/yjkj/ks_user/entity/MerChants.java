@@ -82,7 +82,17 @@ public class MerChants implements Serializable {
 	private BigDecimal balanceProfitFrozen;
 	@Column(name = "used")
 	private String used;
-	
+	@Column(name = "isNotUse")
+	private String isNotUse;  //1可用，2不可用
+
+	public String getIsNotUse() {
+		return isNotUse;
+	}
+
+	public void setIsNotUse(String isNotUse) {
+		this.isNotUse = isNotUse;
+	}
+
 	public MerChants() {
 		super();
 	}

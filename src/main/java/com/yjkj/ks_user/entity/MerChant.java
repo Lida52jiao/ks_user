@@ -73,7 +73,17 @@ public class MerChant {
 	private int credit;
 	
 	private int card;
-	
+
+	private String isNotUse;
+
+	public String getIsNotUse() {
+		return isNotUse;
+	}
+
+	public void setIsNotUse(String isNotUse) {
+		this.isNotUse = isNotUse;
+	}
+
 	public MerChant() {
 		super();
 	}
